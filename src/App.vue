@@ -1,14 +1,13 @@
 <script setup>
-import About from './components/About.vue';
-import Profile from './components/Profile.vue';
+import Layout from './layout.vue';
+import Scheme from './scheme.vue';
+
+
 </script>
 
 <template>
 
-<div class="flex justify-center items-start gap-4 p-8">
-  <Profile/>
-  <About/>
-</div>
+<Layout/>
 
 </template>
 
