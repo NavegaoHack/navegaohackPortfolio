@@ -1,4 +1,5 @@
 <script setup>
+import { onMounted, ref } from 'vue';
 
 const address = [
     {
@@ -14,6 +15,13 @@ const address = [
         img: "https://www.svgrepo.com/show/522167/location.svg"
     }
 ]
+
+const Projects = ref([])
+
+onMounted(async() => {
+    const response = await fetch("https://api.github.com/users/navegaohack/repos")
+    Projects.value = await response.json()
+})
 
 </script>
 
@@ -49,47 +57,10 @@ const address = [
         <main class="p-4 border w-2/3 max-md:w-full">
             <h3 class="text-3xl text-center font-bold mb-4">Projects</h3>
             <div class="flex flex-wrap justify-center gap-4">
-                <div class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
+                <div v-for="Project in Projects" :key=Project.id class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
                     <img src="" alt="" class="w-full h-2/3 border">
-                    <h2 class="text-xl">gameoflife</h2>
-                    <p class="">a game that crashes everytime when its open lol</p>
-                </div>
-
-                <div class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
-                    <img src="" alt="" class="w-full h-2/3 border">
-                    <h2 class="text-xl">gameoflife</h2>
-                    <p class="">a game that crashes everytime when its open lol</p>
-                </div>
-                <div class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
-                    <img src="" alt="" class="w-full h-2/3 border">
-                    <h2 class="text-xl">gameoflife</h2>
-                    <p class="">a game that crashes everytime when its open lol</p>
-                </div>
-                            <div class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
-                    <img src="" alt="" class="w-full h-2/3 border">
-                    <h2 class="text-xl">gameoflife</h2>
-                    <p class="">a game that crashes everytime when its open lol</p>
-                </div>
-                <div class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
-                    <img src="" alt="" class="w-full h-2/3 border">
-                    <h2 class="text-xl">gameoflife</h2>
-                    <p class="">a game that crashes everytime when its open lol</p>
-                </div>
-
-                            <div class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
-                    <img src="" alt="" class="w-full h-2/3 border">
-                    <h2 class="text-xl">gameoflife</h2>
-                    <p class="">a game that crashes everytime when its open lol</p>
-                </div>
-                            <div class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
-                    <img src="" alt="" class="w-full h-2/3 border">
-                    <h2 class="text-xl">gameoflife</h2>
-                    <p class="">a game that crashes everytime when its open lol</p>
-                </div>
-                <div class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
-                    <img src="" alt="" class="w-full h-2/3 border">
-                    <h2 class="text-xl">gameoflife</h2>
-                    <p class="">a game that crashes everytime when its open lol</p>
+                    <h2 class="text-xl">{{ Project.name }}</h2>
+                    <p class="">{{ Project.description }}</p>
                 </div>
             </div>
             
