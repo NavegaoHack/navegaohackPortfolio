@@ -16,6 +16,10 @@ const address = [
     }
 ]
 
+const getRawUrlContent = (path, imageName) => {
+    return "https://raw.githubusercontent.com/" + path + "/refs/heads/main/public/" + imageName
+}
+
 const Projects = ref([])
 
 onMounted(async() => {
@@ -58,7 +62,8 @@ onMounted(async() => {
             <h3 class="text-3xl text-center font-bold mb-4">Projects</h3>
             <div class="flex flex-wrap justify-center gap-4">
                 <div v-for="Project in Projects" :key=Project.id class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
-                    <img src="" alt="" class="w-full h-2/3 border">
+                    <img v-if="Project.id == 916584788" :src="getRawUrlContent(Project.full_name, 'ms-js3.jpg')" alt="" class="w-full h-2/3 border">
+                    <img v-else class="w-full h-2/3 border">
                     <h2 class="text-xl">{{ Project.name }}</h2>
                     <p class="">{{ Project.description }}</p>
                 </div>
