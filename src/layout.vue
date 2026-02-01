@@ -16,8 +16,18 @@ const address = [
     }
 ]
 
-const getRawUrlContent = (path, imageName) => {
-    return "https://raw.githubusercontent.com/" + path + "/refs/heads/main/public/" + imageName
+const getRawUrlContent = (path) => {
+    return "https://raw.githubusercontent.com/" + path + "/refs/heads/main/public/default.jpg"
+}
+
+const chekRawUrl = async (path) => {
+    try {
+        const response = await fetch(getRawUrlContent(path), { method: 'HEAD' })
+        console.log(response.ok)
+        return response.ok
+    } catch {
+        return false
+    }
 }
 
 const Projects = ref([])
@@ -25,6 +35,13 @@ const Projects = ref([])
 onMounted(async() => {
     const response = await fetch("https://api.github.com/users/navegaohack/repos")
     Projects.value = await response.json()
+
+    //adding thumbnail
+
+    Projects.value.forEach(async Project => {
+        Project.hasThumbnail = await chekRawUrl(Project.full_name)
+        Project.thumbnail = getRawUrlContent(Project.full_name)
+    })
 })
 
 </script>
@@ -62,8 +79,10 @@ onMounted(async() => {
             <h3 class="text-3xl text-center font-bold mb-4">Projects</h3>
             <div class="flex flex-wrap justify-center gap-4">
                 <div v-for="Project in Projects" :key=Project.id class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
-                    <img v-if="Project.id == 916584788" :src="getRawUrlContent(Project.full_name, 'ms-js3.jpg')" alt="" class="w-full h-2/3 border">
-                    <img v-else class="w-full h-2/3 border">
+                    <div class="h-2/3 overflow-hidden">
+                        <img v-if="Project.hasThumbnail" :src="getRawUrlContent(Project.full_name)" alt="" class="bg-cover bg-top">
+                        <div v-else class="h-full text-gray-400 text-4xl grid place-content-center"> <p>{{ Project.name }}</p> </div>
+                    </div>
                     <h2 class="text-xl">{{ Project.name }}</h2>
                     <p class="">{{ Project.description }}</p>
                 </div>
