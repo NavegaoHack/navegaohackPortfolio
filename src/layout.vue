@@ -48,21 +48,22 @@ onMounted(async() => {
 
 <template>
     <div class="flex gap-4 p-4 items-start justify-center max-md:flex-col max-md:items-center">
-        <div class="shrink-0 flex flex-col gap-4 items-center border p-4 w-80 max-md:w-full">
-            <img src="https://github.com/navegaohack.png" class="size-48"/>
+        <div class="shrink-0 flex flex-col gap-4 items-center border border-sky-700 rounded-xl p-4 w-80 max-md:w-full">
+            <img src="https://github.com/navegaohack.png" class="size-48 rounded-xl"/>
             <div>
                 <h1 class="text-2xl font-bold text-center">NavegaoHack</h1>
-                <p class="text-lg text-center text-gray-600">Not so professional software developer</p>
+                <p class="text-lg text-center text-gray-600 dark:text-sky-600">Not so professional software developer</p>
             </div>
-            <div class="h-0.5 w-full bg-gray-300"></div>
+            <div class="h-0.5 w-full bg-gray-300 dark:bg-sky-300"></div>
 
 
-            <div v-for="data in address" :key="data.id" class="w-full p-4 border rounded-xl flex gap-2">
-                <img class="size-12 p-2" :src="data.img" alt="img">
+            <div v-for="data in address" :key="data.id" class="w-full p-4 border dark:border-sky-300 rounded-xl flex gap-2">
+
+                <img class="size-12 p-2 dark:fill-sky-300" :src="data.img" alt="img"/>
                 <div class="w-0.5 bg-gray-300"></div>
                 <div>
                 <h2 class="text-xl">{{data.type}}</h2>
-                <p class="text-gray-600">{{data.val}}</p>
+                <p class="text-gray-600 dark:text-sky-600">{{data.val}}</p>
                 </div>
             </div>
 
@@ -75,16 +76,16 @@ onMounted(async() => {
 
 
         </div>
-        <main class="p-4 border w-2/3 max-md:w-full">
+        <main class="p-4 border w-2/3 max-md:w-full rounded-xl dark:border-sky-300">
             <h3 class="text-3xl text-center font-bold mb-4">Projects</h3>
             <div class="flex flex-wrap justify-center gap-4">
-                <div v-for="Project in Projects" :key=Project.id class="w-80 h-72 p-4 border rounded-xl flex flex-col gap-2">
+                <div v-for="Project in Projects" :key=Project.id class="w-80 h-72 p-4 border dark:border-sky-300 rounded-xl flex flex-col gap-2">
                     <div class="h-2/3 overflow-hidden">
-                        <img v-if="Project.hasThumbnail" :src="getRawUrlContent(Project.full_name)" alt="" class="bg-cover bg-top">
+                        <img v-if="Project.hasThumbnail" :src="getRawUrlContent(Project.full_name)" alt="" class="bg-cover bg-top rounded-xl">
                         <div v-else class="h-full text-gray-400 text-4xl grid place-content-center"> <p>{{ Project.name }}</p> </div>
                     </div>
                     <h2 class="text-xl">{{ Project.name }}</h2>
-                    <p class="">{{ Project.description }}</p>
+                    <p class="text-gray-400 dark:text-sky-600">{{ Project.description }}</p>
                 </div>
             </div>
             
