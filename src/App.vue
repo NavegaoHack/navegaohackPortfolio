@@ -7,7 +7,7 @@ import Scheme from './scheme.vue';
 
 <template>
 
-<Layout class="dark:bg-slate-900 dark:text-white"/>
+<Layout class=""/>
 
 </template>
 
