@@ -1,6 +1,15 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { marked } from 'https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js';
 
+
+import { onMounted, ref } from 'vue';
+import RepoDescription from './RepoDescription.vue';
+
+const openRepoDescription = (id) => {
+    alert("work" + id)
+}
+
+const repoDescriptionText = ref("")
 
 const address = [
     {
@@ -19,6 +28,17 @@ const address = [
 
 const getRawUrlContent = (path) => {
     return "https://raw.githubusercontent.com/" + path + "/refs/heads/main/public/default.jpg"
+}
+
+const getReadmeFile = (path) => {
+    const url = "https://raw.githubusercontent.com/" + path + "/refs/heads/main/README.md"
+
+    fetch(url)
+        .then(res => res.text())
+        .then(text => {
+            repoDescriptionText.value = marked.parse(text)
+            console.log(text)
+        })
 }
 
 const chekRawUrl = async (path) => {
@@ -43,12 +63,14 @@ onMounted(async() => {
         Project.hasThumbnail = await chekRawUrl(Project.full_name)
         Project.thumbnail = getRawUrlContent(Project.full_name)
     })
+
+    repoDescriptionText.value = marked.parse('#Hello World')
 })
 
 </script>
 
 <template>
-    <div class="flex gap-4 p-4 items-start justify-center max-md:flex-col max-md:items-center">
+    <div class="relative flex gap-4 p-4 items-start justify-center max-md:flex-col max-md:items-center">
         <div class="flex flex-col gap-4 items-center rounded-xl  p-4 w-80 max-md:w-full">
             <img src="https://github.com/navegaohack.png" class="size-48 rounded-xl shadow-lg"/>
             <div>
@@ -79,7 +101,13 @@ onMounted(async() => {
         <main class="p-4  bg-gray-100 w-2/3 max-md:w-full rounded-xl">
             <h3 class="text-3xl text-center font-bold mb-4">Projects</h3>
             <div class="flex flex-wrap justify-center gap-4">
-                <div v-for="Project in Projects" :key=Project.id class="w-80 h-72 p-4 bg-gray-200 shadow-lg rounded-xl flex flex-col gap-2">
+                <div v-for="Project in Projects"
+                    :key=Project.id
+                    class="w-80 h-72 p-4 bg-gray-200 shadow-lg rounded-xl flex flex-col gap-2"
+                    @click="() => {
+    openRepoDescription(Project.id)
+    getReadmeFile(Project.full_name)                
+                    }">
                     <div class="h-2/3 overflow-hidden rounded-xl">
                         <img v-if="Project.hasThumbnail" :src="getRawUrlContent(Project.full_name)" alt="" class="bg-cover bg-top">
                         <div v-else class="h-full  text-4xl grid text-gray-500 place-content-center"> <p>{{ Project.name }}</p> </div>
@@ -90,6 +118,8 @@ onMounted(async() => {
             </div>
             
         </main>
+
+        <RepoDescription :info="repoDescriptionText"/>
     </div>
 
 </template>
