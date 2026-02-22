@@ -15,11 +15,6 @@ const openRepoDescription = (id) => {
 
 const repoDescriptionText = ref("")
 
-//repoDescriptionText.value = parser.parseFromString(marked.parse('# Hello World'), 'text/html')
-repoDescriptionText.value = parser.parseFromString(marked.parse('# Hello World'), 'text/html')
-repoDescriptionText.value.querySelector('h1').classList.add('text-yellow-600')
-console.log(repoDescriptionText.value.body.innerHTML)
-repoDescriptionText.value = repoDescriptionText.value.body.innerHTML
 
 
 const address = [
@@ -75,7 +70,7 @@ onMounted(async() => {
         Project.thumbnail = getRawUrlContent(Project.full_name)
     })
 
-    //repoDescriptionText.value = parser.parseFromString(marked.parse('# Hello World'), 'text/html')
+    repoDescriptionText.value = parser.parseFromString(marked.parse('# Hello World'), 'text/html')
 
 
 })

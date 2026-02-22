@@ -6,6 +6,29 @@
   }
 }
 
-.animate-slide {
-    animation: slide 10s linear infinite;
+/* styles only for the repo description inner content not reachable with conventional tailwindcss */
+
+.repo-description h1 {
+
+  font-weight: bold;
+  font-size: var(--text-2xl); /* 1.5rem (24px) */ 
+  line-height: var(--text-2xl--line-height); /* calc(2 / 1.5) */
 }
+
+.repo-description h2 {
+  font-weight: bold;
+  font-size: var(--text-xl); /* 1.25rem (20px) */ 
+  line-height: var(--text-xl--line-height); /* calc(1.75 / 1.25) */
+}
+
+
+.repo-description tr {
+  text-align: center;
+}
+
+.repo-description tr:nth-child(even) {
+  background-color: var(--color-gray-200);
+}
+
+
+/* ------------------- */
