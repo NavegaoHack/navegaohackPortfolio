@@ -40,10 +40,19 @@ const getReadmeFile = (path) => {
     const url = "https://raw.githubusercontent.com/" + path + "/refs/heads/main/README.md"
 
     fetch(url)
+        .then(res => {
+            if (!res.ok) throw new Error("## Sorry, este repo no tiene README :(")
+            return res
+        })
         .then(res => res.text())
         .then(text => {
             repoDescriptionText.value = marked.parse(text)
             console.log(text)
+            isRepoDescriptionViewable.value = true
+        })
+        .catch(err => {
+            console.log(err)
+            repoDescriptionText.value = marked.parse(err.message)
             isRepoDescriptionViewable.value = true
         })
 }
