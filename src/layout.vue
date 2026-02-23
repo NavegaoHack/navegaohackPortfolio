@@ -122,7 +122,7 @@ onMounted(async() => {
                 <div class="flex flex-wrap justify-center gap-4">
                     <div v-for="Project in Projects"
                         :key=Project.id
-                        class="w-80 h-72 p-4 bg-gray-200 shadow-lg rounded-xl flex flex-col gap-2"
+                        class="w-80 h-72 p-4 bg-gray-200 hover:bg-gray-100 shadow-lg rounded-xl flex flex-col gap-2 hover:-translate-y-2 active:translate-y-2 transition-transform duration-300"
                         @click="() => {
         getReadmeFile(Project.full_name)                
                         }">
