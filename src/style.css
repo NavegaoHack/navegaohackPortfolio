@@ -21,6 +21,14 @@
   line-height: var(--text-xl--line-height); /* calc(1.75 / 1.25) */
 }
 
+.repo-description code {
+  display: block;
+  min-width: 100%;
+  width: 0;
+  overflow: auto;
+  background-color: var(--color-gray-100);
+  padding: var(--text-lg)
+}
 
 .repo-description tr {
   text-align: center;
@@ -28,6 +36,13 @@
 
 .repo-description tr:nth-child(even) {
   background-color: var(--color-gray-200);
+}
+
+.repo-description a {
+  color: var(--color-blue-600)
+}
+.repo-description a:active {
+  color: var(--color-blue-500)
 }
 
 
