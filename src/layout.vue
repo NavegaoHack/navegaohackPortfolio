@@ -41,7 +41,7 @@ const getReadmeFile = (path) => {
 
     fetch(url)
         .then(res => {
-            if (!res.ok) throw new Error("## Sorry, este repo no tiene README :(")
+            if (!res.ok) throw new Error("## Sorry, has not a README yet :(")
             return res
         })
         .then(res => res.text())
