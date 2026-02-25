@@ -5,7 +5,6 @@ import RepoDescription from './RepoDescription.vue';
 import Sidebar from './Sidebar.vue';
 import RepoProject from './RepoProject.vue';
 
-const parser = new DOMParser
 
 const repoDescriptionText = ref("")
 const isRepoDescriptionViewable = ref(false)
@@ -41,8 +40,8 @@ onMounted(async() => {
 
     Projects.value = Projects.value.filter((project) => {return project.id !== 1136249970}) //substract the navegaohack.github.io dist
 
-    //adding thumbnail
-    repoDescriptionText.value = parser.parseFromString(marked.parse('# Hello World'), 'text/html')
+    //adding default test for description popup
+    repoDescriptionText.value = marked.parse('# Hello World')
 
 
 })
