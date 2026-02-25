@@ -60,7 +60,6 @@ const getReadmeFile = (path) => {
 const chekRawUrl = async (path) => {
     try {
         const response = await fetch(getRawUrlContent(path), { method: 'HEAD' })
-        console.log(response.ok)
         return response.ok
     } catch {
         return false
@@ -72,6 +71,8 @@ const Projects = ref([])
 onMounted(async() => {
     const response = await fetch("https://api.github.com/users/navegaohack/repos")
     Projects.value = await response.json()
+
+    Projects.value = Projects.value.filter((project) => {return project.id !== 1136249970}) //substract the navegaohack.github.io dist
 
     //adding thumbnail
 
